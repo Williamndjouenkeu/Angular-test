@@ -1,0 +1,24 @@
+<h2>A faire</h2>
+
+<input matInput [(ngModel)]="newTaskTitle" placeholder="Nouvelle tâche">
+<button matButton="elevated" (click)="addTask()">Ajouter</button>
+
+<ul>
+  <li *ngFor="let task of tasks">
+     <div *ngIf="editingTask?.id === task.id; else viewMode">
+      <input matInput [(ngModel)]="editingTask.title" >
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="save"
+        (click)="saveEdit()"></mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="cancel"
+        (click)="cancelEdit()"></mat-icon>
+    </div>
+
+    <ng-template #viewMode>
+      {{ task.title }}
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="edit" 
+        (click)="startEdit(task)"></mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete" 
+        (click)="deleteTask(task.id)">🗑️</mat-icon>
+    </ng-template>
+</li>
+</ul>
